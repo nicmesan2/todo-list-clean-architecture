@@ -4,12 +4,16 @@ import { TodoStateProvider } from "./store";
 import { useTodoStateMemoryAdapter, useTodoStateHttpAdapter } from "adapters";
 
 const AllTheProviders: React.FC = ({ children }) => {
-    const aService = useTodoStateMemoryAdapter();
-    return <TodoStateProvider todoStateService={aService}>{children}</TodoStateProvider>;
+  const aService = useTodoStateMemoryAdapter();
+  return (
+    <TodoStateProvider todoStateService={aService}>
+      {children}
+    </TodoStateProvider>
+  );
 };
 
 const customRender = (ui: React.ReactElement, options?: RenderOptions) =>
-    render(ui, { wrapper: AllTheProviders, ...options });
+  render(ui, { wrapper: AllTheProviders, ...options });
 
 // re-export everything
 export * from "@testing-library/react";

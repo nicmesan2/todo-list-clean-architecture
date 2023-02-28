@@ -6,90 +6,108 @@ import { AddTodoInput, TodoListColumn } from "shared/components";
 import { useTodo, useTodoSWRImplementation } from "../store";
 
 function TodoListPage() {
-    const {
-        moveToPreviousState,
-        moveToNextState,
-        isChangeToNextStatePossible,
-        isChangeToPreviousStatePossible,
-        addTodo,
-        todos,
-        removeTodo,
-        initTodoState,
-    } = useTodoSWRImplementation();
+  const {
+    moveToPreviousState,
+    moveToNextState,
+    isChangeToNextStatePossible,
+    isChangeToPreviousStatePossible,
+    addTodo,
+    todos,
+    removeTodo,
+    getTodos,
+  } = useTodoSWRImplementation();
 
-    useEffect(() => {
-        initTodoState();
-    }, []);
+  useEffect(() => {
+    getTodos();
+  }, []);
 
-    const handleCreateNewTodo = useCallback(
-        (newTodoDescription: string) => {
-            addTodo(newTodoDescription);
-        },
-        [addTodo]
-    );
+  const handleCreateNewTodo = useCallback(
+    (newTodoDescription: string) => {
+      addTodo(newTodoDescription);
+    },
+    [addTodo]
+  );
 
-    const orderedTodosByState = useMemo(() => {
-        if (!todos) return null;
+  const orderedTodosByState = useMemo(() => {
+    if (!todos) return null;
 
-        const todosListByState: Record<TodoStates, Todo[]> = {
-            [TodoStates.TODO]: [],
-            [TodoStates.IN_PROGRESS]: [],
-            [TodoStates.DONE]: [],
-        };
+    const todosListByState: Record<TodoStates, Todo[]> = {
+      [TodoStates.TODO]: [],
+      [TodoStates.IN_PROGRESS]: [],
+      [TodoStates.DONE]: [],
+    };
 
-        for (const todoId in todos) {
-            const todo: Todo = todos[todoId];
-            todosListByState[todo.state].push(todo);
-        }
+    for (const todoId in todos) {
+      const todo: Todo = todos[todoId];
+      todosListByState[todo.state].push(todo);
+    }
 
-        return todosListByState;
-    }, [todos]);
+    return todosListByState;
+  }, [todos]);
 
-    const todosColumns = useMemo(() => {
-        if (!orderedTodosByState) return <div>Loading...</div>;
+  const todosColumns = useMemo(() => {
+    if (!orderedTodosByState) return <div>Loading...</div>;
 
-        return Object.keys(TodoStates).map((todoState) => {
-            const handleLeftClick = isChangeToPreviousStatePossible(todoState) ? moveToPreviousState : null;
-            const handleRightClick = isChangeToNextStatePossible(todoState) ? moveToNextState : null;
+    return Object.keys(TodoStates).map((todoState) => {
+      const handleLeftClick = isChangeToPreviousStatePossible(
+        todoState as TodoStates
+      )
+        ? moveToPreviousState
+        : undefined;
+      const handleRightClick = isChangeToNextStatePossible(
+        todoState as TodoStates
+      )
+        ? moveToNextState
+        : undefined;
 
-            const titleLabels = {
-                [TodoStates.TODO]: "To do",
-                [TodoStates.IN_PROGRESS]: "In progress",
-                [TodoStates.DONE]: "Done",
-            };
+      const titleLabels = {
+        [TodoStates.TODO]: "To do",
+        [TodoStates.IN_PROGRESS]: "In progress",
+        [TodoStates.DONE]: "Done",
+      };
 
-            return (
-                <div
-                    data-testid={`${todoState}-column`}
-                    key={todoState}
-                    style={{
-                        flex: "1 1 0%",
-                        height: "100%",
-                        overflow: "hidden",
-                        padding: "0 16px",
-                    }}
-                >
-                    <TodoListColumn
-                        title={titleLabels[todoState as TodoStates]}
-                        onLeftClick={handleLeftClick}
-                        onRightClick={handleRightClick}
-                        onRemove={removeTodo}
-                        todos={orderedTodosByState[TodoStates[todoState as TodoStates]]}
-                    />
-                </div>
-            );
-        });
-    }, [orderedTodosByState]);
+      return (
+        <div
+          data-testid={`${todoState}-column`}
+          key={todoState}
+          style={{
+            flex: "1 1 0%",
+            height: "100%",
+            overflow: "hidden",
+            padding: "0 16px",
+          }}
+        >
+          <TodoListColumn<Todo>
+            title={titleLabels[todoState as TodoStates]}
+            onLeftClick={handleLeftClick}
+            onRightClick={handleRightClick}
+            onRemove={removeTodo}
+            todos={orderedTodosByState[TodoStates[todoState as TodoStates]]}
+          />
+        </div>
+      );
+    });
+  }, [orderedTodosByState]);
 
-    return (
-        <>
-            <h2 style={{ textAlign: "center" }}>Todo List!</h2>
-            <div style={{ display: "flex", gap: 16, padding: 12, flex: 1, overflow: "hidden" }}>{todosColumns}</div>
-            <div style={{ padding: "12px 24px", flex: "0 0 auto" }}>
-                <AddTodoInput onSubmit={handleCreateNewTodo} />
-            </div>
-        </>
-    );
+  return (
+    <>
+      <h2 style={{ textAlign: "center" }}>Todo List!</h2>
+      <div
+        style={{
+          display: "flex",
+          gap: 16,
+          padding: 12,
+          flex: 1,
+          overflow: "hidden",
+        }}
+      >
+        {todosColumns}
+      </div>
+      <div style={{ padding: "12px 24px", flex: "0 0 auto" }}>
+        <AddTodoInput onSubmit={handleCreateNewTodo} />
+      </div>
+    </>
+  );
 }
 
 export default TodoListPage;
