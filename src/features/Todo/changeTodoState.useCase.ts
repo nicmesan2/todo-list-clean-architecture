@@ -1,10 +1,9 @@
-import { Todo } from "entities";
-import * as TodoEntity from "entities/Todo/Todo.entity";
+import * as TodoEntity from "domain/Todo/Todo.entity";
 import { TodoStateService } from "services";
 
 // Change todo state to next state depending on current state
 export const changeToNextState = (
-  todo: Todo,
+  todo: TodoEntity.Todo,
   todosStateService: TodoStateService
 ) => {
   const updatedTodo = TodoEntity.changeToNextState(todo);
@@ -13,7 +12,7 @@ export const changeToNextState = (
 
 // Change todo state to previous state depending on current state
 export const changeToPreviousState = (
-  todo: Todo,
+  todo: TodoEntity.Todo,
   todosStateService: TodoStateService
 ) => {
   const updatedTodo = TodoEntity.changeToPreviousState(todo);

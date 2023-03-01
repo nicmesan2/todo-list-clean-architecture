@@ -1,4 +1,4 @@
-import { Todo, Todos, TodoStates } from "../entities";
+import { Todo, Todos, TodoStates } from "../domain";
 
 export interface UseTodo {
   getTodos: () => void;

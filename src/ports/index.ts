@@ -1,1 +1,1 @@
-export * from "./TodoRepository";
+export * from "./TodoRepository.port";

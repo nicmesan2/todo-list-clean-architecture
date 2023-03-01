@@ -6,7 +6,7 @@ import {
   isChangeToNextStatePossible,
   isChangeToPreviousStatePossible,
   Todos,
-} from "../entities";
+} from "../domain";
 import {
   addNewTodo,
   changeToNextState,

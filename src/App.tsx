@@ -7,7 +7,7 @@ import {
   useTodoStateMemoryAdapter,
   useTodoStateHttpAdapter,
   useTodoStateReduxAdapter,
-} from "adapters";
+} from "adapters/TodoState";
 // Use either of the following providers
 import { TodoStateProvider, TodoSWRProvider } from "store";
 

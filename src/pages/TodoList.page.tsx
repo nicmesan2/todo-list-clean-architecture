@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useMemo } from "react";
 
-import { Todo, TodoStates } from "entities/Todo/Todo.entity";
+import { Todo, TodoStates } from "domain/Todo";
 import { AddTodoInput, TodoListColumn } from "shared/components";
 // Use either of the following providers hooks. Remember to use the corresponding provider in App.tsx
 import { useTodo, useTodoSWRImplementation } from "../store";

@@ -1,4 +1,4 @@
-import { TodoStateService } from "../../services";
+import { TodoStateService } from "services";
 
 export const removeTodo = (
   todoId: string,

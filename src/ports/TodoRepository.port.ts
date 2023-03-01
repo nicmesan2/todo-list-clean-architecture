@@ -1,6 +1,6 @@
-import { Todo, Todos } from "../entities";
+import { Todo, Todos } from "../domain";
 
-export interface TodoRepository {
+export interface TodoRepositoryPort {
   selectAll: () => Promise<Todos>;
   addOne: (todo: Todo) => Promise<Todo>;
   updateOne: (todo: Todo) => Promise<Todo>;

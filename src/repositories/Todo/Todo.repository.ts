@@ -1,8 +1,8 @@
-import { Todo } from "../entities";
-import { TodoRepository } from "../ports";
-import { httpClient } from "../shared/lib/httpClient";
+import { Todo } from "../../domain";
+import { TodoRepositoryPort } from "../../ports";
+import { httpClient } from "../../shared/lib/httpClient";
 
-export const todoRepository: TodoRepository = {
+export const todoRepository: TodoRepositoryPort = {
   selectAll: async () => {
     const response = await httpClient.get<Todo[]>("todo");
 

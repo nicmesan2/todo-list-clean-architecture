@@ -1,5 +1,5 @@
 import { TodoStateService } from "services";
-import { createTodo } from "entities/Todo/Todo.entity";
+import { createTodo } from "domain/Todo/Todo.entity";
 
 export const addNewTodo = async (
   newTodoDescription: string,

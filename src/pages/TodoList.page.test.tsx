@@ -1,7 +1,7 @@
 import React from "react";
 import { render, fireEvent, within, screen } from "../test-utils";
 import TodoListPage from "./TodoList.page";
-import { LOCAL_STORAGE_KEY } from "../adapters";
+import { LOCAL_STORAGE_KEY } from "../adapters/TodoState";
 
 const addNewTodo = (description: string) => {
   const addTodoButton = screen.getByText("Add Todo");

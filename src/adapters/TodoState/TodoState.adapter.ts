@@ -4,9 +4,9 @@ import {
   configureStore,
 } from "@reduxjs/toolkit";
 
-import { Todo, Todos, updateTodos, addTodo } from "entities/Todo/Todo.entity";
+import { Todo, Todos, updateTodos, addTodo } from "domain/Todo";
 import { TodoStateService } from "services";
-import { todoRepository } from "../repositories";
+import { todoRepository } from "repositories";
 
 // This file should contain the implementation of the TodoStateService.To illustrate how easy is to change
 // the implementation of the TodoStateService, we are going to implement 4 different adapters:

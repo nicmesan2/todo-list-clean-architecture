@@ -10,7 +10,7 @@ import {
   isChangeToPreviousStatePossible,
   changeToNextState,
   changeToPreviousState,
-} from "../entities";
+} from "../domain";
 import * as useCases from "features/Todo";
 import { UseTodo } from "./useTodo.type";
 

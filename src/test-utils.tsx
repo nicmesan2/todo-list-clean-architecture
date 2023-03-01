@@ -1,7 +1,7 @@
 import React from "react";
 import { render, RenderOptions } from "@testing-library/react";
 import { TodoStateProvider } from "./store";
-import { useTodoStateMemoryAdapter, useTodoStateHttpAdapter } from "adapters";
+import { useTodoStateMemoryAdapter, useTodoStateHttpAdapter } from "adapters/TodoState";
 
 const AllTheProviders: React.FC = ({ children }) => {
   const aService = useTodoStateMemoryAdapter();
